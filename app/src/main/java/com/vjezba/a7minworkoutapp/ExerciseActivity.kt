@@ -34,25 +34,22 @@ class ExerciseActivity : AppCompatActivity() {
         if (supportActionBar != null){
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-
         exerciseList = Constants.defaultExerciseList()
-
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
-
         setUpRestView()
-
-
     }
 
     private fun setUpRestView(){
-        binding?.exerciseName?.setTextColor(Color.parseColor("red"))
+        binding?.apply {
+            exerciseName.setTextColor(Color.parseColor("red"))
+            exerciseName.text = exerciseList!![currentExercisePosition].getName()
+        }
 
         if (restTimer != null){
             restTimer?.cancel()
             restProgress = 0
-            binding?.groupExercise?.visibility = View.INVISIBLE
         }
         setRestProgressBar()
     }
@@ -67,16 +64,13 @@ class ExerciseActivity : AppCompatActivity() {
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
-
-
         setExerciseProgressBar()
     }
-
 
     private fun setRestProgressBar(){
         binding?.progressBarRest?.progress = restProgress
 
-        restTimer = object : CountDownTimer(10000, 1000){
+        restTimer = object : CountDownTimer(10*1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.progressBarRest?.progress = 10 - restProgress
@@ -92,7 +86,7 @@ class ExerciseActivity : AppCompatActivity() {
     private fun setExerciseProgressBar(){
         binding?.progressBarExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(30000, 1000){
+        exerciseTimer = object : CountDownTimer(30*1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
                 binding?.progressBarExercise?.progress = 30 - exerciseProgress
@@ -108,17 +102,14 @@ class ExerciseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         if (restTimer != null){
             restTimer?.cancel()
             restProgress = 0
         }
-
         if (exerciseTimer !=null){
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
-
         binding = null
     }
 }
