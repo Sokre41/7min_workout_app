@@ -7,158 +7,170 @@
     tools:context=".ExerciseActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarExercise"
+        android:id="@+id/toolbar_exercise"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:theme="@style/ToolbarTheme"
         android:background="@color/white"
-        android:titleTextColor="@color/colorPrimary"/>
+        android:theme="@style/ToolbarTheme"
+        android:titleTextColor="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_exerciseImage"
+        android:id="@+id/exercise_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitCenter"
         android:foregroundGravity="right"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_jumping_jacks"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/ll_ExerciseInfo"
-        app:layout_constraintTop_toBottomOf="@id/toolbarExercise"
+        app:layout_constraintBottom_toTopOf="@id/get_ready_for"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <LinearLayout
-        android:id="@+id/ll_ExerciseInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/iv_exerciseImage"
-        app:layout_constraintBottom_toTopOf="@id/fl_exerciseView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_exercise" />
 
     <TextView
-        android:id="@+id/tv_getReadyFor"
+        android:id="@+id/get_ready_for"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET READY FOR"
-        android:textSize="@dimen/default_button_text_size"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
+        android:text="@string/get_ready_for"
         android:textAlignment="center"
-        />
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/default_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/exercise_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exercise_image" />
 
-        <TextView
-        android:id="@+id/tv_ExerciseName"
+    <TextView
+        android:id="@+id/exercise_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET READY FOR"
-        android:textSize="@dimen/default_button_text_size"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
         android:textAlignment="center"
-        />
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/default_button_text_size"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/get_ready_for"
+        tools:text="Jumping Jack" />
 
-
-</LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/fl_exerciseView"
+    <View
+        android:id="@+id/outer_circle_exercise"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        tools:visibility="visible"
         android:background="@drawable/items_circular_color_accent_border"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_ExerciseInfo">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
-        <ProgressBar
-            android:id="@+id/progressBarExercise"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_gravity="center"
-            android:background="@drawable/circular_progress_red_exercise"
-            android:progressDrawable="@drawable/circular_progress_bar_exercise"
-            android:indeterminate="false"
-            android:max="30"
-            android:progress="300"
-            android:rotation="-90"
-            />
-
-        <LinearLayout
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:background="@drawable/item_circular_color_accent_bg"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_exerciseTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:text="30"
-                />
-
-        </LinearLayout>
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/fl_RestView"
+    <View
+        android:id="@+id/outer_circle_rest"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/items_circular_color_accent_border_red"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_ExerciseInfo"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_exercise"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circular_progress_red_exercise"
+        android:indeterminate="false"
+        android:max="30"
+        android:progress="300"
+        android:progressDrawable="@drawable/circular_progress_bar_exercise"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_rest"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circular_progress_bar_rest"
+        android:indeterminate="false"
+        android:max="10"
+        android:progress="100"
+        android:progressDrawable="@drawable/circular_progress_red_rest"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise" />
+
+    <View
+        android:id="@+id/timer_bg_exercise"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/item_circular_color_accent_bg"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/timer_bg_rest"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/item_circular_color_accent_bg_red"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/exercise_time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise" />
+
+    <TextView
+        android:id="@+id/rest_time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_exercise"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_exercise"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_exercise"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_exercise" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_exercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="invisible"
-        tools:visibility="visible">
+        app:constraint_referenced_ids="outer_circle_exercise, progress_bar_exercise,timer_bg_exercise,exercise_time_value" />
 
-        <ProgressBar
-            android:id="@+id/progressBarRest"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_gravity="center"
-            android:background="@drawable/circular_progress_bar_rest"
-            android:progressDrawable="@drawable/circular_progress_red_rest"
-            android:indeterminate="false"
-            android:max="10"
-            android:progress="100"
-            android:rotation="-90"
-            />
-
-        <LinearLayout
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:background="@drawable/item_circular_color_accent_bg_red"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_restTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:text="10"
-                />
-
-        </LinearLayout>
-
-    </FrameLayout>
-
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="outer_circle_rest, progress_bar_rest,timer_bg_rest,rest_time_value" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

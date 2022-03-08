@@ -47,11 +47,12 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setUpRestView(){
-        binding?.tvExerciseName?.setTextColor(Color.parseColor("red"))
+        binding?.exerciseName?.setTextColor(Color.parseColor("red"))
 
         if (restTimer != null){
             restTimer?.cancel()
             restProgress = 0
+            binding?.groupExercise?.visibility = View.INVISIBLE
         }
         setRestProgressBar()
     }
@@ -65,6 +66,7 @@ class ExerciseActivity : AppCompatActivity() {
         if (exerciseTimer !=null){
             exerciseTimer?.cancel()
             exerciseProgress = 0
+            binding?.groupRest?.visibility = View.INVISIBLE
         }
 
 
@@ -79,7 +81,7 @@ class ExerciseActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.progressBarRest?.progress = 10 - restProgress
-                binding?.tvRestTime?.text = (10 - restProgress).toString()
+                binding?.restTimeValue?.text = (10 - restProgress).toString()
             }
 
             override fun onFinish() {
@@ -96,7 +98,7 @@ class ExerciseActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
                 binding?.progressBarExercise?.progress = 30 - exerciseProgress
-                binding?.tvExerciseTime?.text = (30 - exerciseProgress).toString()
+                binding?.exerciseTimeValue?.text = (30 - exerciseProgress).toString()
             }
 
             override fun onFinish() {
