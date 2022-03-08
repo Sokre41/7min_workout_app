@@ -20,7 +20,7 @@ class ExerciseActivity : AppCompatActivity() {
     private var exerciseProgress: Int = 0
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
-    private var currentExercisePosition = -1
+    private var currentExercisePosition = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,15 +58,14 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setupExerciseView(){
-        binding?.flRestView?.visibility = View.INVISIBLE
-        binding?.tvGetReadyFor?.visibility = View.INVISIBLE
-        binding?.ivExerciseImage?.setImageResource(exerciseList!![currentExercisePosition].getImage())
-        binding?.tvExerciseName?.text = exerciseList!![currentExercisePosition].getName()
-        binding?.flExerciseView?.visibility = View.VISIBLE
+        binding?.apply {
+            groupRest.visibility = View.INVISIBLE
+            groupExercise.visibility = View.VISIBLE
+            exerciseImage.setImageResource(exerciseList!![currentExercisePosition].getImage())
+        }
         if (exerciseTimer !=null){
             exerciseTimer?.cancel()
             exerciseProgress = 0
-            binding?.groupRest?.visibility = View.INVISIBLE
         }
 
 
@@ -85,7 +84,6 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                currentExercisePosition++
                 setupExerciseView()
             }
         }.start()
@@ -102,6 +100,7 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                currentExercisePosition++
                 Toast.makeText(this@ExerciseActivity,"Bla", Toast.LENGTH_LONG).show()
             }
         }.start()
