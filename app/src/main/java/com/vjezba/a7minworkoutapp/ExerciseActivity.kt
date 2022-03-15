@@ -4,6 +4,8 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
@@ -26,6 +28,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = 0
+    private var handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
-        setUpRestView()
+        handler.postDelayed({
+            setUpRestView()
+        }, 3*1000)
+
     }
 
     private fun setUpRestView(){
