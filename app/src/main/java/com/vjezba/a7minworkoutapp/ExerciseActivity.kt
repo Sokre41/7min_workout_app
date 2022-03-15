@@ -4,15 +4,20 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.vjezba.a7minworkoutapp.databinding.ActivityExerciseBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-
-class ExerciseActivity : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var binding:ActivityExerciseBinding? = null
+    private var tts: TextToSpeech? = null
+    private var tts2: TextToSpeech? = null
 
     private var restTimer: CountDownTimer? = null
     private var restProgress: Int = 0
@@ -27,7 +32,8 @@ class ExerciseActivity : AppCompatActivity() {
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        //tv_timer.text = "${(restTimer/1000).toString()}"
+        tts = TextToSpeech(this, this)
+        tts2 = TextToSpeech(this, this)
 
         setSupportActionBar(binding?.toolbarExercise)
 
@@ -42,10 +48,16 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setUpRestView(){
+
         binding?.apply {
+            groupRest.visibility = View.VISIBLE
+            groupExercise.visibility = View.INVISIBLE
             exerciseName.setTextColor(Color.parseColor("red"))
             exerciseName.text = exerciseList!![currentExercisePosition].getName()
+            exerciseImage.setImageResource(exerciseList!![currentExercisePosition].getImage())
+            nextExercise.visibility = View.VISIBLE
         }
+        speakOut(binding?.nextExercise?.text!!.toString(), exerciseList!![currentExercisePosition].getName())
 
         if (restTimer != null){
             restTimer?.cancel()
@@ -58,6 +70,7 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.apply {
             groupRest.visibility = View.INVISIBLE
             groupExercise.visibility = View.VISIBLE
+            nextExercise.visibility = View.INVISIBLE
             exerciseImage.setImageResource(exerciseList!![currentExercisePosition].getImage())
         }
         if (exerciseTimer !=null){
@@ -70,11 +83,11 @@ class ExerciseActivity : AppCompatActivity() {
     private fun setRestProgressBar(){
         binding?.progressBarRest?.progress = restProgress
 
-        restTimer = object : CountDownTimer(10*1000, 1000){
+        restTimer = object : CountDownTimer(3*1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
-                binding?.progressBarRest?.progress = 10 - restProgress
-                binding?.restTimeValue?.text = (10 - restProgress).toString()
+                binding?.progressBarRest?.progress = 3 - restProgress
+                binding?.restTimeValue?.text = (3 - restProgress).toString()
             }
 
             override fun onFinish() {
@@ -86,16 +99,21 @@ class ExerciseActivity : AppCompatActivity() {
     private fun setExerciseProgressBar(){
         binding?.progressBarExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(30*1000, 1000){
+        exerciseTimer = object : CountDownTimer(3*1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
-                binding?.progressBarExercise?.progress = 30 - exerciseProgress
-                binding?.exerciseTimeValue?.text = (30 - exerciseProgress).toString()
+                binding?.progressBarExercise?.progress = 3 - exerciseProgress
+                binding?.exerciseTimeValue?.text = (3 - exerciseProgress).toString()
             }
 
             override fun onFinish() {
                 currentExercisePosition++
-                Toast.makeText(this@ExerciseActivity,"Bla", Toast.LENGTH_LONG).show()
+                if (currentExercisePosition <exerciseList?.size!!){
+                    setUpRestView()
+                }else{
+                    Toast.makeText(this@ExerciseActivity, "Good Job!!", Toast.LENGTH_LONG).show()
+                }
+
             }
         }.start()
     }
@@ -110,6 +128,27 @@ class ExerciseActivity : AppCompatActivity() {
             exerciseTimer?.cancel()
             exerciseProgress = 0
         }
+        if (tts != null){
+            tts?.stop()
+            tts?.shutdown()
+        }
         binding = null
+    }
+
+    override fun onInit(status: Int) {
+        if(status == TextToSpeech.SUCCESS){
+            val result = tts!!.setLanguage(Locale.ENGLISH)
+            if (result == TextToSpeech.LANG_MISSING_DATA ||
+                result == TextToSpeech.LANG_NOT_SUPPORTED){
+                Log.e("TTS", "The Language specified is not Supported!")
+            }
+        }else{
+            Log.e("TTS", "Initialization Failed")
+        }
+    }
+
+    private fun speakOut(text: String,text2: String){
+        tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+        tts2?.speak(text2, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 }
