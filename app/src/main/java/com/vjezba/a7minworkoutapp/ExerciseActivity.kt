@@ -28,7 +28,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var restProgress: Int = 0
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress: Int = 0
-
     private var exerciseList : ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = 0
     private var handler = Handler(Looper.getMainLooper())
@@ -81,8 +80,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             exerciseImage.setImageResource(exerciseList!![currentExercisePosition].getImage())
             nextExercise.visibility = View.VISIBLE
         }
-        speakOut(binding?.nextExercise?.text!!.toString(), exerciseList!![currentExercisePosition].getName())
-
         if (restTimer != null){
             restTimer?.cancel()
             restProgress = 0
@@ -121,11 +118,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setRestProgressBar(){
         binding?.progressBarRest?.progress = restProgress
 
-        restTimer = object : CountDownTimer(3*1000, 1000){
+        restTimer = object : CountDownTimer(11*1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
-                binding?.progressBarRest?.progress = 3 - restProgress
-                binding?.restTimeValue?.text = (3 - restProgress).toString()
+                binding?.progressBarRest?.progress = 11 - restProgress
+                binding?.restTimeValue?.text = (11 - restProgress).toString()
             }
 
             override fun onFinish() {
@@ -137,11 +134,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun setExerciseProgressBar(){
         binding?.progressBarExercise?.progress = exerciseProgress
 
-        exerciseTimer = object : CountDownTimer(3*1000, 1000){
+        exerciseTimer = object : CountDownTimer(31*1000, 1000){
             override fun onTick(millisUntilFinished: Long) {
                 exerciseProgress++
-                binding?.progressBarExercise?.progress = 3 - exerciseProgress
-                binding?.exerciseTimeValue?.text = (3 - exerciseProgress).toString()
+                binding?.progressBarExercise?.progress = 31 - exerciseProgress
+                binding?.exerciseTimeValue?.text = (31 - exerciseProgress).toString()
             }
 
             override fun onFinish() {
@@ -167,8 +164,17 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             exerciseProgress = 0
         }
         if (tts != null){
-            tts?.stop()
-            tts?.shutdown()
+            tts!!.stop()
+            tts!!.shutdown()
+        }
+
+        if (tts2!= null){
+            tts2!!.stop()
+            tts2!!.shutdown()
+        }
+
+        if (player != null){
+            player!!.stop()
         }
         binding = null
     }
