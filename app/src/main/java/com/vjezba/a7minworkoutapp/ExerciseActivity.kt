@@ -1,6 +1,8 @@
 package com.vjezba.a7minworkoutapp
 
 import android.graphics.Color
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -11,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.vjezba.a7minworkoutapp.databinding.ActivityExerciseBinding
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -20,7 +23,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var binding:ActivityExerciseBinding? = null
     private var tts: TextToSpeech? = null
     private var tts2: TextToSpeech? = null
-
+    private var player: MediaPlayer? = null
     private var restTimer: CountDownTimer? = null
     private var restProgress: Int = 0
     private var exerciseTimer: CountDownTimer? = null
@@ -55,6 +58,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun setUpRestView(){
 
+        speakOut(binding?.nextExercise?.text!!.toString(), exerciseList!![currentExercisePosition].getName())
+
+        try {
+            val soundURI = Uri.parse(
+                "android.resource://com.vjezba.a7minworkoutapp/"
+                        + R.raw.app_src_main_res_raw_press_start)
+            player = MediaPlayer.create(applicationContext,soundURI)
+            player?.apply {
+                isLooping = false
+                start()
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+
         binding?.apply {
             groupRest.visibility = View.VISIBLE
             groupExercise.visibility = View.INVISIBLE
@@ -73,6 +91,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setupExerciseView(){
+
+        try {
+            val soundURI = Uri.parse(
+                "android.resource://com.vjezba.a7minworkoutapp/"
+                        + R.raw.app_src_main_res_raw_press_start)
+            player = MediaPlayer.create(applicationContext,soundURI)
+            player?.apply {
+                isLooping = false
+                start()
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+
         binding?.apply {
             groupRest.visibility = View.INVISIBLE
             groupExercise.visibility = View.VISIBLE
