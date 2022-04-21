@@ -1,4 +1,7 @@
-package com.vjezba.a7minworkoutapp
+package com.vjezba.a7minworkoutapp.common
+
+import com.vjezba.a7minworkoutapp.ExerciseModel
+import com.vjezba.a7minworkoutapp.R
 
 object Constants {
 

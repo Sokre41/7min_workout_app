@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     android:padding="@dimen/main_screen_main_layout_padding"
     >
 
@@ -12,32 +12,112 @@
         android:id="@+id/myImageView"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/flStart"
+        app:layout_constraintBottom_toTopOf="@+id/outer_circle_start"
         android:contentDescription="@string/image"
         android:layout_width="match_parent"
         android:src="@drawable/img_main_page"
         android:layout_height="220dp"/>
 
-    <FrameLayout
-        android:id="@+id/flStart"
+    <View
+        android:id="@+id/outer_circle_start"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/item_color_accent_border_ripple_bg"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myImageView">
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Start"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/default_button_text_size"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Start"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/default_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/outer_circle_start"
+        app:layout_constraintEnd_toEndOf="@id/outer_circle_start"
+        app:layout_constraintTop_toTopOf="@id/outer_circle_start"
+        app:layout_constraintBottom_toBottomOf="@id/outer_circle_start"/>
+
+    <View
+        android:id="@+id/circle_bmi"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/outer_circle_bmi_ripple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/circle_history"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:id="@+id/circle_history"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/outer_circle_bmi_ripple"
+        app:layout_constraintStart_toEndOf="@+id/circle_bmi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/circle_bmi_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="BMI"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/circle_bmi"
+        app:layout_constraintEnd_toEndOf="@id/circle_bmi"
+        app:layout_constraintTop_toTopOf="@id/circle_bmi"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/circle_history_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="@id/circle_history"
+        app:layout_constraintEnd_toEndOf="@id/circle_history"
+        app:layout_constraintTop_toTopOf="@id/circle_history"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/bmi_calculator_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Calculator"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/default_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/circle_bmi"
+        app:layout_constraintStart_toStartOf="@id/circle_bmi"
+        app:layout_constraintEnd_toEndOf="@id/circle_bmi"/>
+
+    <TextView
+        android:id="@+id/circle_history_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="History"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/default_button_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/circle_history"
+        app:layout_constraintEnd_toEndOf="@id/circle_history"
+        app:layout_constraintTop_toBottomOf="@id/circle_history"
+        />
 
 
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

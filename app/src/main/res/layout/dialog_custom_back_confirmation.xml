@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/question_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you Sure?"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This will stop your workout. You've come this far, are you sure you want to quit?"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_title"/>
+
+    <TextView
+        android:id="@+id/yes_answer"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="YES"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/no_answer"
+        app:layout_constraintTop_toBottomOf="@id/question_text"/>
+
+    <TextView
+        android:id="@+id/no_answer"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="NO"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/yes_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_text"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
